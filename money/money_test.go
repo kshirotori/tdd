@@ -2,16 +2,24 @@ package money
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestMultiplicationSuccess(t *testing.T) {
 	five := NewDollar(5)
-	product := five.times(2)
-	if product.Amount != 10 {
-		t.Errorf("$5 * 2 != 10. result is %d", product.Amount)
+	product := five.Times(2)
+	assert.Equal(t, NewDollar(10), product)
+	product = five.Times(3)
+	assert.Equal(t, NewDollar(15), product)
+}
+
+func TestEquarity(t *testing.T) {
+	if NewDollar(5).Equals(NewDollar(5)) != true {
+		t.Errorf("Equals is not true")
 	}
-	product = five.times(3)
-	if product.Amount != 15 {
-		t.Errorf("$5 * 3 != 15 result is %d", product.Amount)
+
+	if NewDollar(5).Equals(NewDollar(6)) != false {
+		t.Errorf("Equals must have faild")
 	}
 }
