@@ -13,11 +13,11 @@ func TestMultiplication(t *testing.T) {
 }
 
 func TestEquarity(t *testing.T) {
-	assert.True(t, Equals(NewDollar(5), NewDollar(5)))
-	assert.False(t, Equals(NewDollar(5), NewDollar(6)))
-	assert.True(t, Equals(NewFranc(5), NewFranc(5)))
-	assert.False(t, Equals(NewFranc(5), NewFranc(6)))
-	assert.False(t, Equals(NewFranc(5), NewDollar(5)))
+	assert.True(t, NewDollar(5).Equals(NewDollar(5)))
+	assert.False(t, NewDollar(5).Equals(NewDollar(6)))
+	assert.True(t, NewFranc(5).Equals(NewFranc(5)))
+	assert.False(t, NewFranc(5).Equals(NewFranc(6)))
+	assert.False(t, NewFranc(5).Equals(NewDollar(5)))
 }
 
 func TestFrancMultiplication(t *testing.T) {
@@ -27,6 +27,6 @@ func TestFrancMultiplication(t *testing.T) {
 }
 
 func TestCurrency(t *testing.T) {
-	assert.Equal(t, "USD", NewDollar(1).Currency())
-	assert.Equal(t, "CHF", NewFranc(1).Currency())
+	assert.Equal(t, USD, NewDollar(1).Currency())
+	assert.Equal(t, CHF, NewFranc(1).Currency())
 }
