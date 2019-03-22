@@ -26,6 +26,12 @@ func (m *Impl) Equals(a Money) bool {
 		m.currency == a.Currency()
 }
 
+// Times ...
+func (m *Impl) Times(multiplier int) Money {
+	//return Dollar(m.amount * multiplier)
+	return &Impl{amount: m.amount * multiplier, currency: m.currency}
+}
+
 // Amount ...
 func (m *Impl) Amount() int {
 	return m.amount
@@ -37,21 +43,17 @@ func (m *Impl) Currency() int {
 }
 
 // NewDollar ...
-func (m *Impl) NewDollar(amount int) Money {
-	return &Dollar{
-		&Impl{
-			amount:   amount,
-			currency: USD,
-		},
+func NewDollar(amount int) Money {
+	return &Impl{
+		amount:   amount,
+		currency: USD,
 	}
 }
 
 // NewFranc ...
-func (m *Impl) NewFranc(amount int) Money {
-	return &Franc{
-		&Impl{
-			amount:   amount,
-			currency: CHF,
-		},
+func NewFranc(amount int) Money {
+	return &Impl{
+		amount:   amount,
+		currency: CHF,
 	}
 }
