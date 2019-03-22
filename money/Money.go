@@ -3,6 +3,7 @@ package money
 // Money ...
 type Money interface {
 	Equals(Money) bool
+	Plus(Money) Money
 	Times(int) Money
 	Amount() int
 	Currency() int
@@ -24,6 +25,11 @@ type Impl struct {
 func (m *Impl) Equals(a Money) bool {
 	return m.amount == a.Amount() &&
 		m.currency == a.Currency()
+}
+
+// Plus ...
+func (m *Impl) Plus(addend Money) Money {
+	return &Impl{amount: m.amount + addend.Amount(), currency: m.currency}
 }
 
 // Times ...
