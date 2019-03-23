@@ -3,10 +3,15 @@ package money
 // Money ...
 type Money interface {
 	Equals(Money) bool
-	Plus(Money) Money
 	Times(int) Money
+	Plus(Money) Money
 	Amount() int
 	Currency() int
+}
+
+// Expression ...
+type Expression interface {
+	Plus(Money) Money
 }
 
 // const ...
@@ -49,7 +54,7 @@ func (m *Impl) Currency() int {
 }
 
 // Dollar ...
-func Dollar(amount int) Money {
+func Dollar(amount int) *Impl {
 	return &Impl{
 		amount:   amount,
 		currency: USD,
@@ -57,7 +62,7 @@ func Dollar(amount int) Money {
 }
 
 // Franc ...
-func Franc(amount int) Money {
+func Franc(amount int) *Impl {
 	return &Impl{
 		amount:   amount,
 		currency: CHF,
