@@ -48,16 +48,16 @@ func (m *Impl) Currency() int {
 	return m.currency
 }
 
-// NewDollar ...
-func NewDollar(amount int) Money {
+// Dollar ...
+func Dollar(amount int) Money {
 	return &Impl{
 		amount:   amount,
 		currency: USD,
 	}
 }
 
-// NewFranc ...
-func NewFranc(amount int) Money {
+// Franc ...
+func Franc(amount int) Money {
 	return &Impl{
 		amount:   amount,
 		currency: CHF,
