@@ -9,9 +9,6 @@ type Money interface {
 	Currency() int
 }
 
-// Expression ...
-type Expression interface{}
-
 // const ...
 const (
 	USD = iota
@@ -32,7 +29,8 @@ func (m *Impl) Equals(a Money) bool {
 
 // Plus ...
 func (m *Impl) Plus(addend Money) Expression {
-	return &Impl{amount: m.Amount() + addend.Amount(), currency: m.Currency()}
+	//return &Impl{amount: m.Amount() + addend.Amount(), currency: m.Currency()}
+	return &Sum{m, addend}
 }
 
 // Times ...
