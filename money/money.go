@@ -3,16 +3,14 @@ package money
 // Money ...
 type Money interface {
 	Equals(Money) bool
+	Plus(Money) Expression
 	Times(int) Money
-	Plus(Money) Money
 	Amount() int
 	Currency() int
 }
 
 // Expression ...
-type Expression interface {
-	Plus(Money) Money
-}
+type Expression interface{}
 
 // const ...
 const (
@@ -33,8 +31,8 @@ func (m *Impl) Equals(a Money) bool {
 }
 
 // Plus ...
-func (m *Impl) Plus(addend Money) Money {
-	return &Impl{amount: m.amount + addend.Amount(), currency: m.currency}
+func (m *Impl) Plus(addend Money) Expression {
+	return &Impl{amount: m.Amount() + addend.Amount(), currency: m.Currency()}
 }
 
 // Times ...

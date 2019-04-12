@@ -7,7 +7,8 @@ import (
 )
 
 func TestMultiplication(t *testing.T) {
-	five := Dollar(5)
+	var five Money
+	five = Dollar(5)
 	assert.Equal(t, Dollar(10), five.Times(2))
 	assert.Equal(t, Dollar(15), five.Times(3))
 }
@@ -23,13 +24,14 @@ func TestCurrency(t *testing.T) {
 	assert.Equal(t, CHF, Franc(1).Currency())
 }
 
-func TestAddition(t *testing.T) {
-}
+func TestSimpleAddition(t *testing.T) {
+	var five, reduced Money
+	var sum Expression
+	var bank Bank
 
-func TestSimpleAddtion(t *testing.T) {
-	five := Dollar(5)
-	sum := five.Plus(five)
-	bank := Bank{}
-	reduced := bank.reduce(Expression(sum), "USD")
+	five = Dollar(5)
+	sum = five.Plus(five)
+	bank = Bank{}
+	reduced = bank.Reduced(sum, "USD")
 	assert.Equal(t, Dollar(10), reduced)
 }
