@@ -5,6 +5,10 @@ type Bank struct {
 }
 
 // Reduced sourceをtoの通貨に換算する
-func (b *Bank) Reduced(source Expression, to string) Money {
-	return Dollar(10)
+func (b *Bank) Reduce(source Expression, to int) Money {
+	sum, ok := source.(Sum)
+	if ok {
+		return sum.Reduce(to)
+	}
+	return nil
 }
