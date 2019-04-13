@@ -10,7 +10,9 @@ type Money interface {
 }
 
 // Expression ...
-type Expression interface{}
+type Expression interface {
+	Reduce(bank *Bank, to int) Money
+}
 
 // const ...
 const (
@@ -33,13 +35,19 @@ func (m *Impl) Equals(a Money) bool {
 // Plus ...
 func (m *Impl) Plus(addend Money) Expression {
 	//return &Impl{amount: m.Amount() + addend.Amount(), currency: m.Currency()}
-	return Sum{augend: m, addend: addend}
+	return &Sum{augend: m, addend: addend}
 }
 
 // Times ...
 func (m *Impl) Times(multiplier int) Money {
 	//return Dollar(m.amount * multiplier)
 	return &Impl{amount: m.amount * multiplier, currency: m.currency}
+}
+
+// Reduce ...
+func (m *Impl) Reduce(bank *Bank, to int) Money {
+	rate := bank.Rate(m.currency, to)
+	return &Impl{amount: m.amount / rate, currency: to}
 }
 
 // Amount ...

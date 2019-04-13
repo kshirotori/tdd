@@ -6,9 +6,18 @@ type Bank struct {
 
 // Reduced sourceをtoの通貨に換算する
 func (b *Bank) Reduce(source Expression, to int) Money {
-	sum, ok := source.(Sum)
-	if ok {
-		return sum.Reduce(to)
+	return source.Reduce(b, to)
+}
+
+// AddRate
+func (b *Bank) AddRate(from int, to int, rate int) {
+
+}
+
+// Rate
+func (b *Bank) Rate(from int, to int) int {
+	if from == CHF && to == USD {
+		return 2
 	}
-	return nil
+	return 1
 }
